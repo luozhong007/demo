@@ -11,7 +11,8 @@ import {
     Dimensions,
     ListView,
     Image,
-    StatusBar
+    StatusBar,
+    TouchableOpacity
 } from 'react-native';
 
 let Header = require('../components/Header');
@@ -128,7 +129,7 @@ export default class Sticky extends React.Component {
         });
     }
 
-    initList(rowData) {
+    initList(rowData,_this) {
         let data = rowData,
             index = this.props.index,
             cover_img = data.cover_img,
@@ -137,24 +138,26 @@ export default class Sticky extends React.Component {
             title = data.title,
             ts = data.ts;
         return (
-            <View style={styles.imgView} key={index}>
-                <Image style={styles.activityImg} source={{uri:cover_img}}>
-                    <View style={styles.actAuthorView}>
-                        <View>
-                            <Image style={styles.bannerIcon} source={{uri:head_img}}/>
+            <TouchableOpacity>
+                <View style={styles.imgView} key={index}>
+                    <Image style={styles.activityImg} source={{uri:cover_img}}>
+                        <View style={styles.actAuthorView}>
+                            <View>
+                                <Image style={styles.bannerIcon} source={{uri:head_img}}/>
+                            </View>
+                            <View style={styles.vertialAlignCenter}>
+                                <Text style={styles.clubName}>
+                                    {club_name}
+                                </Text>
+                            </View>
                         </View>
-                        <View style={styles.vertialAlignCenter}>
-                            <Text style={styles.clubName}>
-                                {club_name}
-                            </Text>
+                        <View style={styles.actInfoView}>
+                            <Text style={[styles.actInfoText,styles.actInfoTextDesc]}>{title}</Text>
+                            <Text style={[styles.actInfoTextTime,styles.actInfoText]}>{ts}</Text>
                         </View>
-                    </View>
-                    <View style={styles.actInfoView}>
-                        <Text style={[styles.actInfoText,styles.actInfoTextDesc]}>{title}</Text>
-                        <Text style={[styles.actInfoTextTime,styles.actInfoText]}>{ts}</Text>
-                    </View>
-                </Image>
-            </View>
+                    </Image>
+                </View>
+            </TouchableOpacity>
         )
     }
 
@@ -207,8 +210,8 @@ export default class Sticky extends React.Component {
                         (event) => this.onScroll(event)
                     }
                     renderRow={
-                            (rowData) => this.initList(rowData)
-                          }
+                        (rowData) => this.initList(rowData)
+                      }
                     />
             </View>
         )

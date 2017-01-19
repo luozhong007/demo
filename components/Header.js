@@ -104,7 +104,7 @@ let Header = React.createClass({
             Animated.spring(                          // 可选的基本动画类型: spring, decay, timing
                 this.state.top,                 // 将`bounceValue`值动画化
                 {
-                    toValue: -63                         // 将其值以动画的形式改到一个较小值
+                    toValue: -64                         // 将其值以动画的形式改到一个较小值
                 }
             ).start();
         }
